@@ -1,0 +1,97 @@
+/****       Units Thumbnails styles : 80x72 ****/
+.unit-thumb, .unit-thumb span { display: block; color:#3B7CB9; width:80px; }
+.unit-thumb span { height:72px; margin-bottom: 5px; background:url('../img/units/unit-thumbs-table.gif') no-repeat;}
+
+/* Protoss */
+.unit-thumb .probe {background-position:0 -25px;}
+.unit-thumb:hover .probe {background-position:-400px -25px;}
+.unit-thumb .zealot {background-position:-80px -25px;}
+.unit-thumb:hover .zealot {background-position:-480px -25px;}
+.unit-thumb .stalker {background-position:-160px -25px;}
+.unit-thumb:hover .stalker {background-position:-560px -25px;}
+.unit-thumb .sentry {background-position:-240px -25px;}
+.unit-thumb:hover .sentry {background-position:-640px -25px;}
+.unit-thumb .observer {background-position:-320px -25px;}
+.unit-thumb:hover .observer {background-position:-720px -25px;}
+.unit-thumb .immortal {background-position:0 -111px;}
+.unit-thumb:hover .immortal {background-position:-400px -111px;}
+.unit-thumb .warp-prism {background-position:-80px -111px;}
+.unit-thumb:hover .warp-prism {background-position:-480px -111px;}
+.unit-thumb .colossus {background-position:-160px -111px;}
+.unit-thumb:hover .colossus {background-position:-560px -111px;}
+.unit-thumb .phoenix {background-position:-240px -111px;}
+.unit-thumb:hover .phoenix {background-position:-640px -111px;}
+.unit-thumb .void-ray {background-position:-320px -111px;}
+.unit-thumb:hover .void-ray {background-position:-720px -111px;}
+.unit-thumb .high-templar {background-position:0 -197px;}
+.unit-thumb:hover .high-templar {background-position:-400px -197px;}
+.unit-thumb .dark-templar {background-position:-80px -197px;}
+.unit-thumb:hover .dark-templar {background-position:-480px -197px;}
+.unit-thumb .archon {background-position:-160px -197px;}
+.unit-thumb:hover .archon {background-position:-560px -197px;}
+.unit-thumb .carrier {background-position:-240px -197px;}
+.unit-thumb:hover .carrier {background-position:-640px -197px;}
+.unit-thumb .mothership {background-position:-320px -197px;}
+.unit-thumb:hover .mothership {background-position:-720px -197px;}
+
+/* Terran */
+.unit-thumb .scv {background-position:0 -313px;}
+.unit-thumb:hover .scv {background-position:-400px -313px;}
+.unit-thumb .marine {background-position:-80px -313px;}
+.unit-thumb:hover .marine {background-position:-480px -313px;}
+.unit-thumb .marauder {background-position:-160px -313px;}
+.unit-thumb:hover .marauder {background-position:-560px -313px;}
+.unit-thumb .reaper{background-position:-240px -313px;}
+.unit-thumb:hover .reaper {background-position:-640px -313px;}
+.unit-thumb .ghost {background-position:-320px -313px;}
+.unit-thumb:hover .ghost {background-position:-720px -313px;}
+.unit-thumb .hellion {background-position:0 -399px;}
+.unit-thumb:hover .hellion {background-position:-400px -399px;}
+.unit-thumb .siege-tank {background-position:-80px -399px;}
+.unit-thumb:hover .siege-tank {background-position:-480px -399px;}
+.unit-thumb .thor {background-position:-160px -399px;}
+.unit-thumb:hover .thor {background-position:-560px -399px;}
+.unit-thumb .viking {background-position:-240px -399px;}
+.unit-thumb:hover .viking {background-position:-640px -399px;}
+.unit-thumb .viking-assault {background:url('../../images/game/unit-thumbs-sample.gif') no-repeat; background-position:0 0;}
+
+.unit-thumb .medivac {background-position:-320px -399px;}
+.unit-thumb:hover .medivac {background-position:-720px -399px;}
+.unit-thumb .raven {background-position:0 -485px;}
+.unit-thumb:hover .raven {background-position:-400px -485px;}
+.unit-thumb .banshee {background-position:-80px -485px;}
+.unit-thumb:hover .banshee {background-position:-480px -485px;}
+.unit-thumb .battlecruiser {background-position:-160px -485px;}
+.unit-thumb:hover .battlecruiser {background-position:-560px -485px;}
+
+/* Zerg */
+.unit-thumb .larva {background-position:0 -601px;}
+.unit-thumb:hover .larva {background-position:-400px -601px;}
+.unit-thumb .drone {background-position:-80px -601px;}
+.unit-thumb:hover .drone {background-position:-480px -601px;}
+.unit-thumb .overlord {background-position:-160px -601px;}
+.unit-thumb:hover .overlord {background-position:-560px -601px;}
+.unit-thumb .zergling{background-position:-240px -601px;}
+.unit-thumb:hover .zergling {background-position:-640px -601px;}
+.unit-thumb .queen {background-position:-320px -601px;}
+.unit-thumb:hover .queen {background-position:-720px -601px;}
+.unit-thumb .hydralisk {background-position:0 -687px;}
+.unit-thumb:hover .hydralisk {background-position:-400px -687px;}
+.unit-thumb .baneling {background-position:-80px -687px;}
+.unit-thumb:hover .baneling {background-position:-480px -687px;}
+.unit-thumb .overseer {background-position:-160px -687px;}
+.unit-thumb:hover .overseer {background-position:-560px -687px;}
+.unit-thumb .roach {background-position:-240px -687px;}
+.unit-thumb:hover .roach {background-position:-640px -687px;}
+.unit-thumb .infestor {background-position:-320px -687px;}
+.unit-thumb:hover .infestor {background-position:-720px -687px;}
+.unit-thumb .mutalisk {background-position:0 -773px;}
+.unit-thumb:hover .mutalisk {background-position:-400px -773px;}
+.unit-thumb .corruptor {background-position:-80px -773px;}
+.unit-thumb:hover .corruptor {background-position:-480px -773px;}
+.unit-thumb .nydus-worm {background-position:-160px -773px;}
+.unit-thumb:hover .nydus-worm {background-position:-560px -773px;}
+.unit-thumb .ultralisk {background-position:-240px -773px;}
+.unit-thumb:hover .ultralisk {background-position:-640px -773px;}
+.unit-thumb .brood-lord {background-position:-320px -773px;}
+.unit-thumb:hover .brood-lord {background-position:-720px -773px;}

@@ -1,0 +1,97 @@
+<h3><a href="#">Units</a></h3>
+<div id="units">
+  <table style="text-align: center;">
+    <tr>
+      <td><a href="#" class="unit-thumb"><span class="scv"></span>SCV</a></td>
+      <td><a href="#" class="unit-thumb"><span class="marine"></span>Marine</a></td>
+      <td><a href="#" class="unit-thumb"><span class="marauder"></span>Marauder</a></td>
+      <td><a href="#" class="unit-thumb"><span class="reaper"></span>Reaper</a></td>
+    </tr>
+    <tr>
+      <td><a href="#" class="unit-thumb"><span class="ghost"></span>Ghost</a></td>
+      <td><a href="#" class="unit-thumb"><span class="hellion"></span>Hellion</a></td>
+      <td><a href="#" class="unit-thumb"><span class="siege-tank"></span>Siege Tank</a></td>
+      <td><a href="#" class="unit-thumb"><span class="thor"></span>Thor</a></td>
+    </tr>
+    <tr>
+      <td><a href="#" class="unit-thumb"><span class="viking"></span>Viking</a></td>
+      <td><a href="#" class="unit-thumb"><span class="medivac"></span>Medivac</a></td>
+      <td><a href="#" class="unit-thumb"><span class="raven"></span>Raven</a></td>
+      <td><a href="#" class="unit-thumb"><span class="banshee"></span>Banshee</a></td>
+    </tr>
+    <tr>
+      <td><a href="#" class="unit-thumb"><span class="battlecruiser"></span>Battlecruiser</a></td>
+    </tr>
+  </table>
+</div>
+<h3><a href="#">Structures</a></h3>
+<div id="structures"></div>
+<h3><a href="#">Upgrades</a></h3>
+<div id="upgrades"></div>
+<script>
+  // TODO: Replace structure/upgrade generation with static HTML
+  if (!terran) {
+    var terran = new Terran();
+  }
+  
+  $("#terran-supply").html(terran.total_cost.supply.used + " / " + terran.total_cost.supply.total);
+
+  e = $("#structures")[0];
+  e.innerHTML = "<ul>";
+  for (var i in terran.structures) {
+    e.innerHTML += "<li><a href=''>" + i + "</a></li>"
+  }
+  e.innerHTML += "</ul>";
+
+  e = $("#upgrades")[0];
+  e.innerHTML = "<ul>";
+  for (var i in terran.upgrades) {
+    e.innerHTML += "<li><a href=''>" + i + "</a></li>"
+  }
+  e.innerHTML += "</ul>";
+
+  // Handle unit clicks
+  $("#accordion #units a").click(function (event) {
+    try {
+      terran.train(this.text);
+      $("#terran-supply").html(terran.total_cost.supply.used + " / " + terran.total_cost.supply.total);
+      $("#terran-mineral").html(terran.total_cost.mineral);
+      $("#terran-vespene").html(terran.total_cost.vespene);
+      add(this.text, "terran");
+    } catch(err) {
+      error(err.message);
+    }
+    
+    event.preventDefault();
+  });
+  
+  // Handle structure clicks
+  $("#accordion #structures a").click(function (event) {
+    try {
+      terran.construct(this.text);
+      $("#terran-supply").html(terran.total_cost.supply.used + " / " + terran.total_cost.supply.total);
+      $("#terran-mineral").html(terran.total_cost.mineral);
+      $("#terran-vespene").html(terran.total_cost.vespene);
+      add(this.text, "terran");
+    } catch(err) {
+      error(err.message);
+    }
+    
+    event.preventDefault();
+  });
+  
+  // Handle upgrade clicks
+  $("#accordion #upgrades a").click(function (event) {
+    try {
+      terran.upgrade(this.text);
+      $("#terran-supply").html(terran.total_cost.supply.used + " / " + terran.total_cost.supply.total);
+      $("#terran-mineral").html(terran.total_cost.mineral);
+      $("#terran-vespene").html(terran.total_cost.vespene);
+      add(this.text, "terran");
+    } catch(err) {
+      error(err.message);
+    }
+    
+    event.preventDefault();
+  });
+</script>

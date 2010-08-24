@@ -1,0 +1,99 @@
+<h3><a href="#">Units</a></h3>
+<div id="units">
+  <table style="text-align: center;">
+    <tr>
+      <td><a href="#" class="unit-thumb"><span class="drone"></span>Drone</a></td>
+      <td><a href="#" class="unit-thumb"><span class="overlord"></span>Overlord</a></td>
+      <td><a href="#" class="unit-thumb"><span class="zergling"></span>Zergling</a></td>
+      <td><a href="#" class="unit-thumb"><span class="queen"></span>Queen</a></td>
+    </tr>
+    <tr>
+      <td><a href="#" class="unit-thumb"><span class="hydralisk"></span>Hydralisk</a></td>
+      <td><a href="#" class="unit-thumb"><span class="baneling"></span>Baneling</a></td>
+      <td><a href="#" class="unit-thumb"><span class="overseer"></span>Overseer</a></td>
+      <td><a href="#" class="unit-thumb"><span class="roach"></span>Roach</a></td>
+    </tr>
+    <tr>
+      <td><a href="#" class="unit-thumb"><span class="infestor"></span>Infestor</a></td>
+      <td><a href="#" class="unit-thumb"><span class="mutalisk"></span>Mutalisk</a></td>
+      <td><a href="#" class="unit-thumb"><span class="corruptor"></span>Corruptor</a></td>
+      <td><a href="#" class="unit-thumb"><span class="nydus-worm"></span>Nydus Worm</a></td>
+    </tr>
+    <tr>
+      <td><a href="#" class="unit-thumb"><span class="ultralisk"></span>Ultralisk</a></td>
+      <td><a href="#" class="unit-thumb"><span class="brood-lord"></span>Brood Lord</a></td>
+    </tr>
+  </table>
+</div>
+<h3><a href="#">Structures</a></h3>
+<div id="structures">
+</div>
+<h3><a href="#">Upgrades</a></h3>
+<div id="upgrades"></div>
+<script>
+  // TODO: Replace structure/upgrade generation with static HTML
+  if (!zerg) {
+    var zerg = new Zerg();
+  }
+
+  $("#zerg-supply").html(zerg.total_cost.supply.used + " / " + zerg.total_cost.supply.total);
+
+  e = $("#structures")[0];
+  e.innerHTML = "<ul>";
+  for (var i in zerg.structures) {
+    e.innerHTML += "<li><a href=''>" + i + "</a></li>"
+  }
+  e.innerHTML += "</ul>";
+
+  e = $("#upgrades")[0];
+  e.innerHTML = "<ul>";
+  for (var i in zerg.upgrades) {
+    e.innerHTML += "<li><a href=''>" + i + "</a></li>"
+  }
+  e.innerHTML += "</ul>";
+
+  // Handle unit clicks
+  $("#accordion #units a").click(function (event) {
+    try {
+      zerg.train(this.text);
+      $("#zerg-supply").html(zerg.total_cost.supply.used + " / " + zerg.total_cost.supply.total);
+      $("#zerg-mineral").html(zerg.total_cost.mineral);
+      $("#zerg-vespene").html(zerg.total_cost.vespene);
+      add(this.text, "zerg");
+    } catch(err) {
+      error(err.message);
+    }
+    
+    event.preventDefault();
+  });
+  
+  // Handle structure clicks
+  $("#accordion #structures a").click(function (event) {
+    try {
+      zerg.construct(this.text);
+      $("#zerg-supply").html(zerg.total_cost.supply.used + " / " + zerg.total_cost.supply.total);
+      $("#zerg-mineral").html(zerg.total_cost.mineral);
+      $("#zerg-vespene").html(zerg.total_cost.vespene);
+      add(this.text, "zerg");
+    } catch(err) {
+      error(err.message);
+    }
+    
+    event.preventDefault();
+  });
+  
+  // Handle upgrade clicks
+  $("#accordion #upgrades a").click(function (event) {
+    try {
+      zerg.upgrade(this.text);
+      $("#zerg-supply").html(zerg.total_cost.supply.used + " / " + zerg.total_cost.supply.total);
+      $("#zerg-mineral").html(zerg.total_cost.mineral);
+      $("#zerg-vespene").html(zerg.total_cost.vespene);
+      add(this.text, "zerg");
+    } catch(err) {
+      error(err.message);
+    }
+    
+    event.preventDefault();
+  });
+</script>

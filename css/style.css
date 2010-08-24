@@ -1,0 +1,195 @@
+body {
+    margin: 0;
+    background: #000; /* for non-css3 browsers */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#999999'); /* for IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#999)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #fff,  #999); /* for firefox 3.6+ */
+    background-attachment: fixed;
+    color: #fff;
+    font-family: Verdana, sans-serif;
+    font-size: 0.7em;
+}
+
+#container {
+    position: relative;
+    width: 960px;
+    margin: 0 auto;
+}
+
+#header {
+    margin: 0 auto;
+    text-align: center;
+    color: #000; /* black */
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    text-shadow: 4px 4px 4px #bbb;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: 0em;
+    word-spacing: 0em;
+    line-height: 1em;
+}
+
+#tabs {
+    float: left;
+    width: 550px;
+    height: 500px;
+    margin: 10px 0;
+    overflow: auto;
+}
+
+.unit {
+    height: 30px;
+    text-indent: 40px;
+    border: 1px solid orange; /* orange */
+    padding: 5px;
+    margin: 10px auto;
+    background: transparent no-repeat;
+    background-position: center left;
+    color: #ccc; /* gray */
+}
+
+.structure {
+    height: 30px;
+    text-indent: 40px;
+    border: 1px solid orange; /* orange */
+    padding: 5px;
+    margin: 10px auto;
+    background: transparent no-repeat;
+    background-position: center left;
+    color: #ccc; /* gray */
+}
+
+.upgrade {
+    height: 30px;
+    text-indent: 40px;
+    border: 1px solid orange; /* orange */
+    padding: 5px;
+    margin: 10px auto;
+    background: transparent no-repeat;
+    background-position: center left;
+    color: #ccc; /* gray */
+}
+
+#reset {
+    position: absolute;
+    top: 5px;
+    right: 70px;
+}
+
+#share {
+    position: absolute;
+    top: 5px;
+    right: 5px;   
+}
+
+.build-order {
+    border: 1px solid #ccc; /* gray */
+    width: 620px;
+    height: 430px;
+    margin: 10px auto;
+}
+
+.resources {
+    position: absolute;
+    top: 42px;
+    right: 20px;
+}
+
+#protoss-supply {
+    display: inline-block;
+    background: transparent url("../img/resources/icon-supply-protoss.gif") no-repeat;
+    background-position: bottom left;
+    text-indent: 20px;
+}
+
+#protoss-mineral {
+    display: inline-block;
+    background: transparent url("../img/resources/icon-mineral.gif") no-repeat;
+    background-position: bottom left;
+    text-indent: 20px;
+    margin-left: 5px;
+}
+
+#protoss-vespene {
+    display: inline-block;
+    background: transparent url("../img/resources/icon-vespene-protoss.gif") no-repeat;
+    background-position: bottom left;
+    text-indent: 20px;
+    margin-left: 5px;
+}
+
+#terran-supply {
+    display: inline-block;
+    background: transparent url("../img/resources/icon-supply-terran.gif") no-repeat;
+    background-position: bottom left;
+    text-indent: 20px;
+}
+
+#terran-mineral {
+    display: inline-block;
+    background: transparent url("../img/resources/icon-mineral.gif") no-repeat;
+    background-position: bottom left;
+    text-indent: 20px;
+    margin-left: 5px;
+}
+
+#terran-vespene {
+    display: inline-block;
+    background: transparent url("../img/resources/icon-vespene-terran.gif") no-repeat;
+    background-position: bottom left;
+    text-indent: 20px;
+    margin-left: 5px;
+}
+
+#zerg-supply {
+    display: inline-block;
+    background: transparent url("../img/resources/icon-supply-zerg.gif") no-repeat;
+    background-position: bottom left;
+    text-indent: 20px;
+}
+
+#zerg-mineral {
+    display: inline-block;
+    background: transparent url("../img/resources/icon-mineral.gif") no-repeat;
+    background-position: bottom left;
+    text-indent: 20px;
+    margin-left: 5px;
+}
+
+#zerg-vespene {
+    display: inline-block;
+    background: transparent url("../img/resources/icon-vespene-zerg.gif") no-repeat;
+    background-position: bottom left;
+    text-indent: 20px;
+    margin-left: 5px;
+}
+
+#accordion {
+    float: right;
+    width: 380px;
+    height: 500px;
+    margin: 10px 0;
+}
+
+.clear {
+    clear: both;
+}
+
+#footer {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.error {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background-color: red; /* red */
+    color: #fff; /* white */
+    font-weight: bold;
+    padding: 5px;
+    border: 1px dashed #000; /* black */
+    text-align: center;
+}

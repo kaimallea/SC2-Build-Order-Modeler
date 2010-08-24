@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Starcraft 2 Build Order Modeler</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/units.css" rel="stylesheet" />
+    <!-- TODO: Use local copy of jQuery css for offline usage -->
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/vader/jquery-ui.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="container">
+      
+      <!-- Boring header -->
+      <div id="header">
+        <h1>Starcraft II Build Order Modeler</h1>
+      </div>
+      
+      <!-- Tabs for switching race views -->
+      <div id="tabs">
+        <ul>
+          <li><a href="#protoss"><span>Protoss</span></a></li>
+          <li><a href="#terran"><span>Terran</span></a></li>
+          <li><a href="#zerg"><span>Zerg</span></a></li>
+        </ul>
+        
+        <!-- Protoss view -->
+        <div id="protoss">
+          <div class="resources">
+            <div id="protoss-supply">0 / 0</div>
+            <div id="protoss-mineral">0</div>
+            <div id="protoss-vespene">0</div>
+          </div>
+        </div>
+
+        <!-- Terran view -->
+        <div id="terran">
+          <div class="resources">
+            <div id="terran-supply">0 / 0</div>
+            <div id="terran-mineral">0</div>
+            <div id="terran-vespene">0</div>
+          </div>
+        </div>
+        
+        <!-- Zerg view -->
+        <div id="zerg">
+          <div class="resources">
+            <div id="zerg-supply">0 / 0</div>
+            <div id="zerg-mineral">0</div>
+            <div id="zerg-vespene">0</div>
+          </div>
+        </div>
+        
+        <!-- Buttons to handle a reset or export of the active view -->
+        <button id="reset">Reset</button>
+        <button id="share">Share</button>
+        
+      </div>
+      
+      <!-- An accordion for switching between units/structures/upgrades -->
+      <div id="accordion">
+          <h3><a href="#">Units</a></h3>
+          <div></div>
+          <h3><a href="#">Structures</a></h3>
+          <div></div>
+          <h3><a href="#">Upgrades</a></h3>
+          <div></div>
+      </div>
+      
+      <div class="clear"></div>
+      
+      <div id="footer"><a href="http://mallea.net">Created by Kai Mallea</a></div>
+    </div>
+    <!-- TODO: Use local copy of jQuery for offline usage -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+    <script src="lib/buildorder.js"></script>
+    
+    <!-- TODO: Factor unit tests and encapsulate into single JS file -->
+    <script>
+      // Render tabs and add a handler to
+      // load corresponding HTML on tab
+      // changes.
+      $('#tabs').tabs({
+          select: function(event, ui) {
+            $.ajax({
+          		url: ui.panel.id + ".html",          		
+          		success: function(data) {
+          			$('#accordion')
+          			.accordion('destroy')
+          			.html(data)
+          			.accordion();
+          			// Used to keep track of current view
+          			// for use in other functions/methods
+          			SC2.race_view = ui.panel.id;
+          		}
+          	});
+          }
+      });
+      
+      // Render buttons to theme
+      $("button").button();
+      
+      $("#reset").click(function () {
+        alert(SC2.race_view);
+      })
+      
+      $("#share").click(function () {
+        share();
+      })
+      
+      // Load Protoss as default race view
+      $.ajax({
+    		url: "protoss.html",
+    		success: function(data) {
+    			$('#accordion')
+    			.html(data)
+    			.accordion();
+    		}
+    	});
+    	
+    	// Add to content
+    	function add(what, race) {
+      	what = what.split(' ').join('').toLowerCase();
+      	$("<div class='unit'></div>").
+      	attr("style", "background-image: url('img/units/" + what + ".jpg'").
+      	hide().
+      	prependTo("#" + race).
+      	fadeIn("slow");
+      }
+      
+    	// Error notification
+      function error(txt) {
+      	x = $('#msg');
+      	if (x) {
+      	  x.remove();
+      	}
+      	$('<div id="msg" class="error"></div>')
+      	.html(txt)
+      	.hide()
+      	.appendTo(document.getElementById("tabs"))
+      	.fadeIn();
+      	setTimeout(function () { $('#msg').fadeOut("slow"); }, 3000);
+      }
+      
+      // Reset
+      function reset() {
+      
+      }
+      
+      // Share
+      function share() {
+        alert(protoss.generate_url());
+      }
+    </script>
+  </body>
+</html>
