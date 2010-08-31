@@ -27,23 +27,44 @@
 </div>
 <h3><a href="#">Structures</a></h3>
 <div id="structures">
+    <table>
+      <tr>
+        <td><a href="#" class="struct-thumb"><span class="spawning-pool"></span>Spawning Pool</a></td>
+        <td><a href="#" class="struct-thumb"><span class="extractor"></span>Extractor</a></td>
+        <td><a href="#" class="struct-thumb"><span class="roach-warren"></span>Roach Warren</a></td>
+        <td><a href="#" class="struct-thumb"><span class="hydralisk-den"></span>Hydralisk Den</a></td>
+      </tr>
+      <tr>
+        <td><a href="#" class="struct-thumb"><span class="evolution-chamber"></span>Evolution Chamber</a></td>
+        <td><a href="#" class="struct-thumb"><span class="hatchery"></span>Hatchery</a></td>
+        <td><a href="#" class="struct-thumb"><span class="lair"></span>Lair</a></td>
+        <td><a href="#" class="struct-thumb"><span class="hive"></span>Hive</a></td>
+      </tr>
+      <tr>
+        <td><a href="#" class="struct-thumb"><span class="baneling-nest"></span>Baneling Nest</a></td>
+        <td><a href="#" class="struct-thumb"><span class="spire"></span>Spire</a></td>
+        <td><a href="#" class="struct-thumb"><span class="greater-spire"></span>Greater Spire</a></td>
+        <td><a href="#" class="struct-thumb"><span class="creep-tumor"></span>Creep Tumor</a></td>
+      </tr>
+      <tr>
+        <td><a href="#" class="struct-thumb"><span class="ultralisk-cavern"></span>Ultralisk Cavern</a></td>
+        <td><a href="#" class="struct-thumb"><span class="spine-crawler"></span>Spine Crawler</a></td>
+        <td><a href="#" class="struct-thumb"><span class="spore-crawler"></span>Spore Crawler</a></td>
+        <td><a href="#" class="struct-thumb"><span class="infestation-pit"></span>Infestation Pit</a></td>
+      </tr>
+      <tr>
+        <td><a href="#" class="struct-thumb"><span class="nydus-network"></span>Nydus Network</a></td>
+      </tr>
+    </table>
 </div>
 <h3><a href="#">Upgrades</a></h3>
 <div id="upgrades"></div>
 <script>
-  // TODO: Replace structure/upgrade generation with static HTML
   if (!zerg) {
     var zerg = new Zerg();
   }
 
   $("#zerg-supply").html(zerg.total_cost.supply.used + " / " + zerg.total_cost.supply.total);
-
-  e = $("#structures")[0];
-  e.innerHTML = "<ul>";
-  for (var i in zerg.structures) {
-    e.innerHTML += "<li><a href=''>" + i + "</a></li>"
-  }
-  e.innerHTML += "</ul>";
 
   e = $("#upgrades")[0];
   e.innerHTML = "<ul>";

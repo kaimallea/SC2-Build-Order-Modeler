@@ -27,7 +27,32 @@
   </table>
 </div>
 <h3><a href="#">Structures</a></h3>
-<div id="structures"></div>
+<div id="structures">
+    <table style="text-align: center;">
+      <tr>
+        <td><a href="#" class="struct-thumb"><span class="pylon"></span>Pylon</a></td>
+        <td><a href="#" class="struct-thumb"><span class="gateway"></span>Gateway</a></td>
+        <td><a href="#" class="struct-thumb"><span class="cybernetics-core"></span>Cybernetics Core</a></td>
+        <td><a href="#" class="struct-thumb"><span class="forge"></span>Forge</a></td>
+      </tr>
+      <tr>
+        <td><a href="#" class="struct-thumb"><span class="assimilator"></span>Assimilator</a></td>
+        <td><a href="#" class="struct-thumb"><span class="warpgate"></span>Warpgate</a></td>
+        <td><a href="#" class="struct-thumb"><span class="fleet-beacon"></span>Fleet Beacon</a></td>
+        <td><a href="#" class="struct-thumb"><span class="robotics-facility"></span>Robotics Facility</a></td>
+      </tr>
+      <tr>
+        <td><a href="#" class="struct-thumb"><span class="nexus"></span>Nexus</a></td>
+        <td><a href="#" class="struct-thumb"><span class="photon-cannon"></span>Photon Cannon</a></td>
+        <td><a href="#" class="struct-thumb"><span class="templar-archives"></span>Templar Archives</a></td>
+        <td><a href="#" class="struct-thumb"><span class="stargate"></span>Stargate</a></td>
+      </tr>
+      <tr>
+        <td><a href="#" class="struct-thumb"><span class="twilight-council"></span>Twilight Council</a></td>
+        <td><a href="#" class="struct-thumb"><span class="dark-shrine"></span>Dark Shrine</a></td>
+      </tr>
+    </table>
+</div>
 <h3><a href="#">Upgrades</a></h3>
 <div id="upgrades"></div>
 <!--
@@ -85,13 +110,6 @@
   
   $("#protoss-supply").html(protoss.total_cost.supply.used + " / " + protoss.total_cost.supply.total);
 
-  e = $("#structures")[0];
-  e.innerHTML = "<ul>";
-  for (var i in protoss.structures) {
-    e.innerHTML += "<li><a href=''>" + i + "</a></li>"
-  }
-  e.innerHTML += "</ul>";
-
   e = $("#upgrades")[0];
   e.innerHTML = "<ul>";
   for (var i in protoss.upgrades) {
@@ -106,7 +124,7 @@
       $("#protoss-supply").html(protoss.total_cost.supply.used + " / " + protoss.total_cost.supply.total);
       $("#protoss-mineral").html(protoss.total_cost.mineral);
       $("#protoss-vespene").html(protoss.total_cost.vespene);
-      add(this.text, "protoss");
+      render(this.text, "protoss");
     } catch(err) {
       error(err.message);
     }
@@ -121,7 +139,7 @@
       $("#protoss-supply").html(protoss.total_cost.supply.used + " / " + protoss.total_cost.supply.total);
       $("#protoss-mineral").html(protoss.total_cost.mineral);
       $("#protoss-vespene").html(protoss.total_cost.vespene);
-      add(this.text, "protoss");
+      render(this.text, "protoss");
     } catch(err) {
       error(err.message);
     }
@@ -136,7 +154,7 @@
       $("#protoss-supply").html(protoss.total_cost.supply.used + " / " + protoss.total_cost.supply.total);
       $("#protoss-mineral").html(protoss.total_cost.mineral);
       $("#protoss-vespene").html(protoss.total_cost.vespene);
-      add(this.text, "protoss");
+      render(this.text, "protoss");
     } catch(err) {
       error(err.message);
     }

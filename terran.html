@@ -25,7 +25,37 @@
   </table>
 </div>
 <h3><a href="#">Structures</a></h3>
-<div id="structures"></div>
+<div id="structures">
+    <table>
+      <tr>
+        <td><a href="#" class="struct-thumb"><span class="supply-depot"></span>Supply Depot</a></td>
+        <td><a href="#" class="struct-thumb"><span class="barracks"></span>Barracks</a></td>
+        <td><a href="#" class="struct-thumb"><span class="factory"></span>Factory</a></td>
+        <td><a href="#" class="struct-thumb"><span class="starport"></span>Starport</a></td>
+      </tr>
+      <tr>
+        <td><a href="#" class="struct-thumb"><span class="refinery"></span>Refinery</a></td>
+        <td><a href="#" class="struct-thumb"><span class="orbital-command"></span>Orbital Command</a></td>
+        <td><a href="#" class="struct-thumb"><span class="planetary-fortress"></span>Planetary Fortress</a></td>
+        <td><a href="#" class="struct-thumb"><span class="command-center"></span>Command Center</a></td>
+      </tr>
+      <tr>
+        <td><a href="#" class="struct-thumb"><span class="engineering-bay"></span>Engineering Bay</a></td>
+        <td><a href="#" class="struct-thumb"><span class="bunker"></span>Bunker</a></td>
+        <td><a href="#" class="struct-thumb"><span class="missile-turret"></span>Missile Turret</a></td>
+        <td><a href="#" class="struct-thumb"><span class="sensor-tower"></span>Sensor Tower</a></td>
+      </tr>
+      <tr>
+        <td><a href="#" class="struct-thumb"><span class="ghost-academy"></span>Ghost Academy</a></td>
+        <td><a href="#" class="struct-thumb"><span class="armory"></span>Armory</a></td>
+        <td><a href="#" class="struct-thumb"><span class="fusion-core"></span>Fusion Core</a></td>
+        <td><a href="#" class="struct-thumb"><span class="tech-lab"></span>Tech Lab</a></td>
+      </tr>
+      <tr>
+        <td><a href="#" class="struct-thumb"><span class="reactor"></span>Rector</a></td>
+      </tr>
+    </table>
+</div>
 <h3><a href="#">Upgrades</a></h3>
 <div id="upgrades"></div>
 <script>
@@ -35,13 +65,6 @@
   }
   
   $("#terran-supply").html(terran.total_cost.supply.used + " / " + terran.total_cost.supply.total);
-
-  e = $("#structures")[0];
-  e.innerHTML = "<ul>";
-  for (var i in terran.structures) {
-    e.innerHTML += "<li><a href=''>" + i + "</a></li>"
-  }
-  e.innerHTML += "</ul>";
 
   e = $("#upgrades")[0];
   e.innerHTML = "<ul>";
