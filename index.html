@@ -6,7 +6,6 @@
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/units.css" rel="stylesheet" />
     <link href="css/structures.css" rel="stylesheet" />
-    <!-- TODO: Use local copy of jQuery css for offline usage -->
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/dark-hive/jquery-ui.css" rel="stylesheet" />
 </head>
 <body>
@@ -57,6 +56,9 @@
             <!-- Buttons to handle a reset or export of the active view -->
             <button id="reset">Reset</button>
             <button id="share">Share</button>
+            
+            <!-- Button to undo previous action -->
+            <button id="undo">Undo</button>
 
         </div>
 
@@ -78,42 +80,42 @@
             <a href="https://github.com/kaimallea/Starcraft-2-Build-Order-Modeler">GitHub Repository</a>
         </div>
     </div>
-    
-    <!-- TODO: Use local copy of jQuery for offline usage -->
+
+    <!-- Required libraries -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
     <script src="lib/buildorder.js"></script>
 
     <!-- TODO: Factor unit tests and encapsulate into single JS file -->
     <script>
-    
+
     // Create race objects
     var protoss = new Protoss(),
-        terran = new Terran(),
-        zerg = new Zerg();
-        
+    terran = new Terran(),
+    zerg = new Zerg();
+
     // TODO: Move race/hash checks to before tab render
     var race_view = "protoss"; // default race view 
     var hash = window.location.hash;
-    
+
     if (hash) {
         switch(hash[1])
         {
-        case "p":
+            case "p":
             race_view = "protoss";
             break;
-        case "t":
+            case "t":
             race_view = "terran";
             break;
-        case "z":
+            case "z":
             race_view = "zerg";
             break;
-        default:
+            default:
             race_view = "protoss";
         }
     }
-    
-    
+
+
     //
     //  Render accordian
     //
@@ -125,8 +127,8 @@
             .accordion();
         }
     });
-    
-    
+
+
     //
     // Render tabs
     //
@@ -136,7 +138,7 @@
                 url: ui.panel.id + ".html",          		
                 success: function(data) {
                     race_view = ui.panel.id;
-                    
+
                     $('#accordion')
                     .accordion('destroy')
                     .html(data)
@@ -144,112 +146,173 @@
                 }
             });
         }
-    }).tabs('select', race_view);
-    
-    
-    //
-    // Render buttons to theme
-    //
-    $("button").button();
+        }).tabs('select', race_view);
 
 
-    //
-    // Handle reset button click
-    //
-    $("#reset").click(function () {
-        reset();
-    })
-    
-    
-    //
-    // Handle share button click
-    //
-    $("#share").click(function () {
-        share();
-    })
+        //
+        // Render buttons to theme
+        //
+        $("button").button();
 
 
-    //
-    // Render a unit/structure/upgrade into view
-    //
-    function render(what, race) {
-        var current_supply = $("#" + race_view + "-supply")[0].innerHTML;
-        var trim = what.split(' ').join('').toLowerCase();
-        $("<div class='unit'>" + current_supply + " | " + what + "</div>")
+        //
+        // Handle reset button click
+        //
+        $("#reset").click(function () {
+            reset();
+        });
+
+
+        //
+        // Handle share button click
+        //
+        $("#share").click(function () {
+            share();
+        });
+
+
+        //
+        // Handle undo button blick
+        //
+        $("#undo").click(function () {
+            undo();
+        });
+
+        //
+        // Render a unit/structure/upgrade into view
+        //
+        function render(what, race) {
+            // Update supply display
+            $("#" + race_view + "-supply")
+            .html(eval(race_view + '.total_cost.supply.used + " / " + '
+            + race_view + '.total_cost.supply.total'));
+
+            // Update mineral display
+            $("#" + race_view + "-mineral")
+            .html(eval(race_view + '.total_cost.mineral'));
+
+            // Update vespene display
+            $("#" + race_view + "-vespene")
+            .html(eval(race_view + '.total_cost.vespene'));
+
+            var current_supply = $("#" + race_view + "-supply")[0].innerHTML;
+            var trim = what.split(' ').join('').toLowerCase();
+            $("<div class='unit'>" + current_supply + " | " + what + "</div>")
             .attr("style", "background-image: url('img/units/" + trim + ".jpg'")
             .hide()
             .prependTo("#" + race_view + " .build")
             .fadeIn("slow");
-    }
-
-    //
-    // Error notification
-    //
-    function error(txt) {
-        var id = $('#msg');
-        var target = $("#" + race_view + " .build");
-        
-        // remove any existing error notification from view
-        if (id) { 
-            id.remove();
         }
-        
-        $('<div id="msg" class="error"></div>')
-        .html(txt)
-        .hide()
-        .prependTo(target)
-        .fadeIn();
-        
-        // fade out after 3 secs
-        setTimeout(function () { $('#msg').fadeOut("slow"); }, 3000);
-    }
 
-    // Reset race in view
-    function reset() {
-        if (race_view) {
-            eval(
-                // reset object
-                race_view + ".init();"
-                
-                // reset resources
-                + "$('#" + race_view + "-supply').html("
-                + race_view + ".total_cost.supply.used + ' / ' + "
-                + race_view + ".total_cost.supply.total);"
-                
-                + "$('#" + race_view + "-mineral').html('0');"
-                + "$('#" + race_view + "-vespene').html('0');"
-                
-                // reset build view
-                + "$('#" + race_view + " .build')[0].innerHTML = '';"
-            );
+
+        //
+        // Error notification
+        //
+        function error(txt) {
+            var id = $('#msg');
+            var target = $("#" + race_view + " .build");
+
+            // remove any existing error notification from view
+            if (id) { 
+                id.remove();
+            }
+
+            $('<div id="msg" class="error"></div>')
+            .html(txt)
+            .hide()
+            .prependTo(target)
+            .fadeIn();
+
+            // fade out after 3 secs
+            setTimeout(function () { $('#msg').fadeOut("slow"); }, 3000);
         }
-    }
 
-    // Share build in view
-    function share() {
-        if (race_view) {
+
+        //
+        // Reset race in view
+        //
+        function reset() {
+            if (race_view) {
+                eval(
+                    // reset object
+                    race_view + ".init();"
+
+                    // reset resources
+                    + "$('#" + race_view + "-supply').html("
+                    + race_view + ".total_cost.supply.used + ' / ' + "
+                    + race_view + ".total_cost.supply.total);"
+
+                    + "$('#" + race_view + "-mineral').html('0');"
+                    + "$('#" + race_view + "-vespene').html('0');"
+
+                    // reset build view
+                    + "$('#" + race_view + " .build')[0].innerHTML = '';"
+                );
+            }
+        }
+
+
+        //
+        // Share build in view
+        //
+        function share() {
+            if (race_view) {
+                try
+                {
+                    alert(eval(race_view + ".generate_url();"));
+                }
+                catch(e)
+                {
+                    error(e.message);
+                }
+            }
+        }
+
+
+        //
+        // Undo last action
+        //
+        function undo() {
             try
             {
-                alert(eval(race_view + ".generate_url();"));
+               eval(race_view + ".undo();")
+            }
+            catch(e)
+            {
+                error(e.message);
+            }
+            
+            // Remove last element created
+            var parent = $("#" + race_view + " .build")[0];
+            $(parent.firstChild).remove();
+            
+            // Update supply display
+            $("#" + race_view + "-supply")
+            .html(eval(race_view + '.total_cost.supply.used + " / " + '
+            + race_view + '.total_cost.supply.total'));
+
+            // Update mineral display
+            $("#" + race_view + "-mineral")
+            .html(eval(race_view + '.total_cost.mineral'));
+
+            // Update vespene display
+            $("#" + race_view + "-vespene")
+            .html(eval(race_view + '.total_cost.vespene'));
+        }
+
+        //
+        // Re-build from hash if necessary
+        //
+        if (hash) {
+            try
+            {
+                eval(race_view + ".build_from_url(window.location.href);");
             }
             catch(e)
             {
                 error(e.message);
             }
         }
-    }
-
-    // Re-build from hash if necessary
-    if (hash) {
-        try
-        {
-            eval(race_view + ".build_from_url(window.location.href);");
-        }
-        catch(e)
-        {
-            error(e.message);
-        }
-    }
-    </script>
-</body>
-</html>
+        </script>
+    </body>
+    </html>
