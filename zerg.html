@@ -80,7 +80,7 @@
       $("#zerg-supply").html(zerg.total_cost.supply.used + " / " + zerg.total_cost.supply.total);
       $("#zerg-mineral").html(zerg.total_cost.mineral);
       $("#zerg-vespene").html(zerg.total_cost.vespene);
-      add(this.text, "zerg");
+      render(this.text, "zerg");
     } catch(err) {
       error(err.message);
     }
@@ -95,7 +95,7 @@
       $("#zerg-supply").html(zerg.total_cost.supply.used + " / " + zerg.total_cost.supply.total);
       $("#zerg-mineral").html(zerg.total_cost.mineral);
       $("#zerg-vespene").html(zerg.total_cost.vespene);
-      add(this.text, "zerg");
+      render(this.text, "zerg");
     } catch(err) {
       error(err.message);
     }
@@ -110,7 +110,7 @@
       $("#zerg-supply").html(zerg.total_cost.supply.used + " / " + zerg.total_cost.supply.total);
       $("#zerg-mineral").html(zerg.total_cost.mineral);
       $("#zerg-vespene").html(zerg.total_cost.vespene);
-      add(this.text, "zerg");
+      render(this.text, "zerg");
     } catch(err) {
       error(err.message);
     }

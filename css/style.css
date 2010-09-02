@@ -1,13 +1,18 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
 body {
     margin: 0;
     background: #000; /* for non-css3 browsers */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#999999'); /* for IE */
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#999)); /* for webkit browsers */
-    background: -moz-linear-gradient(top,  #fff,  #999); /* for firefox 3.6+ */
-    background-attachment: fixed;
     color: #fff;
     font-family: Verdana, sans-serif;
-    font-size: 0.7em;
+    font-size: 0.6em;
+    background-image: url("../img/bg/sc2.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 #container {
@@ -34,15 +39,19 @@ body {
 #tabs {
     float: left;
     width: 550px;
-    height: 500px;
+    height: 650px;
     margin: 10px 0;
     overflow: auto;
+}
+
+.build {
+    margin-top: 30px;
 }
 
 .unit {
     height: 30px;
     text-indent: 40px;
-    border: 1px solid orange; /* orange */
+    border: 1px solid red; /* orange */
     padding: 5px;
     margin: 10px auto;
     background: transparent no-repeat;
@@ -53,7 +62,7 @@ body {
 .structure {
     height: 30px;
     text-indent: 40px;
-    border: 1px solid orange; /* orange */
+    border: 1px solid blue; /* orange */
     padding: 5px;
     margin: 10px auto;
     background: transparent no-repeat;
@@ -64,7 +73,7 @@ body {
 .upgrade {
     height: 30px;
     text-indent: 40px;
-    border: 1px solid orange; /* orange */
+    border: 1px solid yellow; /* orange */
     padding: 5px;
     margin: 10px auto;
     background: transparent no-repeat;
@@ -96,6 +105,7 @@ body {
     top: 42px;
     right: 20px;
 }
+
 
 #protoss-supply {
     display: inline-block;
@@ -182,10 +192,16 @@ body {
     text-align: center;
 }
 
+#footer a { 
+    background-color: black; 
+    color: orange;
+    padding: 5px;
+}
+#footer a:active { color: orange; }
+#footer a:visted { color: red; }
+
 .error {
-    position: absolute;
-    top: 50px;
-    left: 0;
+    font-size: 100%;
     background-color: red; /* red */
     color: #fff; /* white */
     font-weight: bold;

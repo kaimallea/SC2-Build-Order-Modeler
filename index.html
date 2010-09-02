@@ -7,7 +7,7 @@
     <link href="css/units.css" rel="stylesheet" />
     <link href="css/structures.css" rel="stylesheet" />
     <!-- TODO: Use local copy of jQuery css for offline usage -->
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/vader/jquery-ui.css" rel="stylesheet" />
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/dark-hive/jquery-ui.css" rel="stylesheet" />
 </head>
 <body>
     <div id="container">
@@ -72,7 +72,11 @@
 
         <div class="clear"></div>
 
-        <div id="footer"><a href="http://mallea.net">Created by Kai Mallea</a></div>
+        <div id="footer">
+            <a href="http://mallea.net">Created by Kai Mallea</a>
+            |
+            <a href="https://github.com/kaimallea/Starcraft-2-Build-Order-Modeler">GitHub Repository</a>
+        </div>
     </div>
     
     <!-- TODO: Use local copy of jQuery for offline usage -->
@@ -83,26 +87,66 @@
     <!-- TODO: Factor unit tests and encapsulate into single JS file -->
     <script>
     
-    var race_view;
-    // Render tabs and add a handler to
-    // load corresponding HTML on tab
-    // changes.
+    // Create race objects
+    var protoss = new Protoss(),
+        terran = new Terran(),
+        zerg = new Zerg();
+        
+    // TODO: Move race/hash checks to before tab render
+    var race_view = "protoss"; // default race view 
+    var hash = window.location.hash;
+    
+    if (hash) {
+        switch(hash[1])
+        {
+        case "p":
+            race_view = "protoss";
+            break;
+        case "t":
+            race_view = "terran";
+            break;
+        case "z":
+            race_view = "zerg";
+            break;
+        default:
+            race_view = "protoss";
+        }
+    }
+    
+    
+    //
+    //  Render accordian
+    //
+    $.ajax({
+        url: race_view + ".html",
+        success: function(data) {
+            $('#accordion')
+            .html(data)
+            .accordion();
+        }
+    });
+    
+    
+    //
+    // Render tabs
+    //
     $('#tabs').tabs({
         select: function(event, ui) {
             $.ajax({
                 url: ui.panel.id + ".html",          		
                 success: function(data) {
+                    race_view = ui.panel.id;
+                    
                     $('#accordion')
                     .accordion('destroy')
                     .html(data)
                     .accordion();
-                    // Keep track of current race view
-                    race_view = ui.panel.id;
                 }
             });
         }
-    });
-
+    }).tabs('select', race_view);
+    
+    
     //
     // Render buttons to theme
     //
@@ -124,29 +168,15 @@
         share();
     })
 
-    //
-    // Load Protoss as default race view
-    //
-    race_view = "protoss";
-    
-    $.ajax({
-        url: "protoss.html",
-        success: function(data) {
-            $('#accordion')
-            .html(data)
-            .accordion();
-        }
-    });
-
 
     //
     // Render a unit/structure/upgrade into view
     //
     function render(what, race) {
-        what = what.split(' ').join('').toLowerCase();
-        
-        $("<div class='unit'></div>")
-            .attr("style", "background-image: url('img/units/" + what + ".jpg'")
+        var current_supply = $("#" + race_view + "-supply")[0].innerHTML;
+        var trim = what.split(' ').join('').toLowerCase();
+        $("<div class='unit'>" + current_supply + " | " + what + "</div>")
+            .attr("style", "background-image: url('img/units/" + trim + ".jpg'")
             .hide()
             .prependTo("#" + race_view + " .build")
             .fadeIn("slow");
@@ -157,6 +187,7 @@
     //
     function error(txt) {
         var id = $('#msg');
+        var target = $("#" + race_view + " .build");
         
         // remove any existing error notification from view
         if (id) { 
@@ -166,7 +197,7 @@
         $('<div id="msg" class="error"></div>')
         .html(txt)
         .hide()
-        .appendTo(document.getElementById("tabs"))
+        .prependTo(target)
         .fadeIn();
         
         // fade out after 3 secs
@@ -197,7 +228,26 @@
     // Share build in view
     function share() {
         if (race_view) {
-            alert(eval(race_view + ".generate_url();"));   
+            try
+            {
+                alert(eval(race_view + ".generate_url();"));
+            }
+            catch(e)
+            {
+                error(e.message);
+            }
+        }
+    }
+
+    // Re-build from hash if necessary
+    if (hash) {
+        try
+        {
+            eval(race_view + ".build_from_url(window.location.href);");
+        }
+        catch(e)
+        {
+            error(e.message);
         }
     }
     </script>

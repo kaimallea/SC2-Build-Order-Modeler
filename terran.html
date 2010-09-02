@@ -80,7 +80,7 @@
       $("#terran-supply").html(terran.total_cost.supply.used + " / " + terran.total_cost.supply.total);
       $("#terran-mineral").html(terran.total_cost.mineral);
       $("#terran-vespene").html(terran.total_cost.vespene);
-      add(this.text, "terran");
+      render(this.text, "terran");
     } catch(err) {
       error(err.message);
     }
@@ -95,7 +95,7 @@
       $("#terran-supply").html(terran.total_cost.supply.used + " / " + terran.total_cost.supply.total);
       $("#terran-mineral").html(terran.total_cost.mineral);
       $("#terran-vespene").html(terran.total_cost.vespene);
-      add(this.text, "terran");
+      render(this.text, "terran");
     } catch(err) {
       error(err.message);
     }
@@ -110,7 +110,7 @@
       $("#terran-supply").html(terran.total_cost.supply.used + " / " + terran.total_cost.supply.total);
       $("#terran-mineral").html(terran.total_cost.mineral);
       $("#terran-vespene").html(terran.total_cost.vespene);
-      add(this.text, "terran");
+      render(this.text, "terran");
     } catch(err) {
       error(err.message);
     }
