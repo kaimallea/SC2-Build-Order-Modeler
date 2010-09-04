@@ -103,12 +103,15 @@
 -->
 </div>
 <script>
-// TODO: Replace structure/upgrade generation with static HTML
+// TODO: Replace upgrade generation with static HTML
 if (!protoss) {
     var protoss = new Protoss();
 }
 
-$("#protoss-supply").html(protoss.total_cost.supply.used + " / " + protoss.total_cost.supply.total);
+$("#protoss-supply").html(
+    protoss.total_cost.supply.used + 
+    " / " + 
+    protoss.total_cost.supply.total);
 
 e = $("#upgrades")[0];
 e.innerHTML = "<ul>";

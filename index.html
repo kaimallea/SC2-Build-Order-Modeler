@@ -30,7 +30,7 @@
                     <div id="protoss-mineral">0</div>
                     <div id="protoss-vespene">0</div>
                 </div>
-                <div class="build"></div>
+                <div id="protoss-build"></div>
             </div>
 
             <!-- Terran view -->
@@ -40,7 +40,7 @@
                     <div id="terran-mineral">0</div>
                     <div id="terran-vespene">0</div>
                 </div>
-                <div class="build"></div>
+                <div id="terran-build"></div>
             </div>
 
             <!-- Zerg view -->
@@ -50,16 +50,15 @@
                     <div id="zerg-mineral">0</div>
                     <div id="zerg-vespene">0</div>
                 </div>
-                <div class="build"></div>
+                <div id="zerg-build"></div>
             </div>
 
             <!-- Buttons to handle a reset or export of the active view -->
             <button id="reset">Reset</button>
             <button id="share">Share</button>
-            
+
             <!-- Button to undo previous action -->
             <button id="undo">Undo</button>
-
         </div>
 
         <!-- An accordion for switching between units/structures/upgrades -->
@@ -81,6 +80,14 @@
         </div>
     </div>
 
+    <!-- Soft popup to share and shorten url -->
+    <div id="share-dialog" title="Share Build Order">
+        Use the link below to share this build order:<br />
+        <input type="text" name="sharable-url" value="" id="shareable-url" /> <button id="copy-url">Copy</button>
+        <br /><br />
+        <button id="shorten-url" onclick="">Shorten</button>
+    </div>
+    
     <!-- Required libraries -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
@@ -95,7 +102,9 @@
     zerg = new Zerg();
 
     // TODO: Move race/hash checks to before tab render
-    var race_view = "protoss"; // default race view 
+    var race_view = "protoss"; // default race view
+
+
     var hash = window.location.hash;
 
     if (hash) {
@@ -146,7 +155,7 @@
                 }
             });
         }
-        }).tabs('select', race_view);
+    }).tabs('select', race_view);
 
 
         //
@@ -154,7 +163,20 @@
         //
         $("button").button();
 
-
+        
+        //
+        // Handle dialog
+        //
+        $("#share-dialog").dialog({
+            autoOpen: false,
+            resizable: false,
+            draggable: false,
+            modal: true,
+            height: 125,
+            width: 600
+        });
+        
+        
         //
         // Handle reset button click
         //
@@ -178,29 +200,32 @@
             undo();
         });
 
+
         //
         // Render a unit/structure/upgrade into view
         //
         function render(what, race) {
             // Update supply display
             $("#" + race_view + "-supply")
-            .html(eval(race_view + '.total_cost.supply.used + " / " + '
-            + race_view + '.total_cost.supply.total'));
+            .html(
+                window[race_view].total_cost.supply.used + " / " +
+                window[race_view].total_cost.supply.total
+            );
 
             // Update mineral display
             $("#" + race_view + "-mineral")
-            .html(eval(race_view + '.total_cost.mineral'));
+            .html(window[race_view].total_cost.mineral);
 
             // Update vespene display
             $("#" + race_view + "-vespene")
-            .html(eval(race_view + '.total_cost.vespene'));
+            .html(window[race_view].total_cost.vespene);
 
             var current_supply = $("#" + race_view + "-supply")[0].innerHTML;
             var trim = what.split(' ').join('').toLowerCase();
             $("<div class='unit'>" + current_supply + " | " + what + "</div>")
             .attr("style", "background-image: url('img/units/" + trim + ".jpg'")
             .hide()
-            .prependTo("#" + race_view + " .build")
+            .prependTo("#" + race_view + "-build")
             .fadeIn("slow");
         }
 
@@ -208,23 +233,27 @@
         //
         // Error notification
         //
-        function error(txt) {
-            var id = $('#msg');
-            var target = $("#" + race_view + " .build");
+        function error(msg) {
+            var child = $('#msg'),
+            parent = $("#" + race_view);
 
-            // remove any existing error notification from view
-            if (id) { 
-                id.remove();
+            // remove any existing notification from view
+            if (child) { 
+                child.remove();
             }
 
+            // create new element and prepend to parent
             $('<div id="msg" class="error"></div>')
-            .html(txt)
-            .hide()
-            .prependTo(target)
-            .fadeIn();
+                .html(msg)
+                .hide()
+                .prependTo(parent)
+                .fadeIn();
 
             // fade out after 3 secs
-            setTimeout(function () { $('#msg').fadeOut("slow"); }, 3000);
+            setTimeout(function () { 
+                $('#msg').fadeOut("slow"); }, 
+                3000
+            );
         }
 
 
@@ -232,23 +261,26 @@
         // Reset race in view
         //
         function reset() {
-            if (race_view) {
-                eval(
-                    // reset object
-                    race_view + ".init();"
+            // reset (re-initalize) race object
+            window[race_view].init();
 
-                    // reset resources
-                    + "$('#" + race_view + "-supply').html("
-                    + race_view + ".total_cost.supply.used + ' / ' + "
-                    + race_view + ".total_cost.supply.total);"
+            // reset spent resources display
+            $("#" + race_view + "-supply")
+            .html(
+                window[race_view].total_cost.supply.used + 
+                " / " +
+                window[race_view].total_cost.supply.total);
 
-                    + "$('#" + race_view + "-mineral').html('0');"
-                    + "$('#" + race_view + "-vespene').html('0');"
+            // Update mineral display
+            $("#" + race_view + "-mineral")
+                .html(window[race_view].total_cost.mineral);
 
-                    // reset build view
-                    + "$('#" + race_view + " .build')[0].innerHTML = '';"
-                );
-            }
+            // Update vespene display
+            $("#" + race_view + "-vespene")
+                .html(window[race_view].total_cost.vespene);
+            
+            // reset build view
+            $("#" + race_view + "-build")[0].innerHTML = "";
         }
 
 
@@ -256,49 +288,55 @@
         // Share build in view
         //
         function share() {
-            if (race_view) {
-                try
-                {
-                    alert(eval(race_view + ".generate_url();"));
-                }
-                catch(e)
-                {
-                    error(e.message);
-                }
+            try {
+                $("#shareable-url")[0].value = window[race_view].generate_url();
             }
+            catch(e) {
+                error(e.message);
+                $("#shareable-url")[0].value = "";
+                return;
+            }
+            
+            $('#share-dialog').dialog('open');
         }
 
 
         //
         // Undo last action
         //
+        // TODO: Fix bug where last unit doesn't get removed
+        // due to msg interrupting order of children
         function undo() {
             try
             {
-               eval(race_view + ".undo();")
+                window[race_view].undo();
             }
             catch(e)
             {
                 error(e.message);
+                return;
             }
-            
+
             // Remove last element created
-            var parent = $("#" + race_view + " .build")[0];
+            var parent = $("#" + race_view + "-build")[0];
             $(parent.firstChild).remove();
-            
+
             // Update supply display
             $("#" + race_view + "-supply")
-            .html(eval(race_view + '.total_cost.supply.used + " / " + '
-            + race_view + '.total_cost.supply.total'));
+            .html(
+                window[race_view].total_cost.supply.used + 
+                " / " + 
+                window[race_view].total_cost.supply.total);
 
-            // Update mineral display
-            $("#" + race_view + "-mineral")
-            .html(eval(race_view + '.total_cost.mineral'));
+                // Update mineral display
+                $("#" + race_view + "-mineral")
+                .html(window[race_view].total_cost.mineral);
 
-            // Update vespene display
-            $("#" + race_view + "-vespene")
-            .html(eval(race_view + '.total_cost.vespene'));
+                // Update vespene display
+                $("#" + race_view + "-vespene")
+                .html(window[race_view].total_cost.vespene);
         }
+
 
         //
         // Re-build from hash if necessary
@@ -306,13 +344,17 @@
         if (hash) {
             try
             {
-                eval(race_view + ".build_from_url(window.location.href);");
+                window[race_view].build_from_url(
+                    window.location.href,
+                    function (x) {
+                        render(x);
+                    });
             }
             catch(e)
             {
                 error(e.message);
             }
         }
-        </script>
-    </body>
-    </html>
+    </script>
+</body>
+</html>

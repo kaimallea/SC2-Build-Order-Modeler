@@ -44,7 +44,7 @@ body {
     overflow: auto;
 }
 
-.build {
+#protoss-build, #terran-build, #zerg-build {
     margin-top: 30px;
 }
 
@@ -91,6 +91,12 @@ body {
     position: absolute;
     top: 5px;
     right: 5px;   
+}
+
+#undo {
+    position: absolute;
+    top: 5px;
+    right: 135px;
 }
 
 .build-order {
@@ -197,10 +203,12 @@ body {
     color: orange;
     padding: 5px;
 }
+
 #footer a:active { color: orange; }
 #footer a:visted { color: red; }
 
 .error {
+    margin-top: 20px;
     font-size: 100%;
     background-color: red; /* red */
     color: #fff; /* white */
@@ -208,4 +216,17 @@ body {
     padding: 5px;
     border: 1px dashed #000; /* black */
     text-align: center;
+}
+
+#share-dialog {
+    text-align: center;
+}
+#share-dialog input[type='text'] {
+    width: 500px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    border: solid 1px #000;
+    background-color: beige;
+    padding: 5px;
 }
