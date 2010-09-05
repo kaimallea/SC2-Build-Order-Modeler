@@ -126,7 +126,7 @@ $("#accordion #units a").click(function (event) {
         protoss.train(this.text);
         render(this.text);
     } catch(err) {
-        error(err.message);
+        displayError(err.message);
     }
 
     event.preventDefault();
@@ -138,7 +138,7 @@ $("#accordion #structures a").click(function (event) {
         protoss.construct(this.text);
         render(this.text);
     } catch(err) {
-        error(err.message);
+        displayError(err.message);
     }
 
     event.preventDefault();
@@ -150,7 +150,7 @@ $("#accordion #upgrades a").click(function (event) {
         protoss.upgrade(this.text);
         render(this.text);
     } catch(err) {
-        error(err.message);
+        displayError(err.message);
     }
 
     event.preventDefault();

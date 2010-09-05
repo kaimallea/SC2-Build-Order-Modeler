@@ -79,7 +79,7 @@ $("#accordion #units a").click(function (event) {
         terran.train(this.text);
         render(this.text);
     } catch(err) {
-        error(err.message);
+        displayError(err.message);
     }
 
     event.preventDefault();
@@ -91,7 +91,7 @@ $("#accordion #structures a").click(function (event) {
         terran.construct(this.text);
         render(this.text);
     } catch(err) {
-        error(err.message);
+        displayError(err.message);
     }
 
     event.preventDefault();
@@ -103,7 +103,7 @@ $("#accordion #upgrades a").click(function (event) {
         terran.upgrade(this.text);
         render(this.text);
     } catch(err) {
-        error(err.message);
+        displayError(err.message);
     }
 
     event.preventDefault();
