@@ -83,15 +83,28 @@
     <!-- Soft popup to share and shorten url -->
     <div id="share-dialog" title="Share Build Order">
         Use the link below to share this build order:<br />
-        <input type="text" name="sharable-url" value="" id="shareable-url" /> <button id="copy-url">Copy</button>
+        <input type="text" name="shareable-url" value="" id="shareable-url" />
         <br /><br />
-        <button id="shorten-url" onclick="">Shorten via bit.ly</button>
+        <button id="shorten-url">Shorten via bit.ly</button>
     </div>
     
-    <!-- Required libraries -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
     <script src="lib/buildorder.js"></script>
     <script src="lib/site.js"></script>
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18382512-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
 </body>
 </html>

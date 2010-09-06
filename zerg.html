@@ -76,8 +76,8 @@ e.innerHTML += "</ul>";
 // Handle unit clicks
 $("#accordion #units a").click(function (event) {
     try {
-        zerg.train(this.text);
-        render(this.text);
+        zerg.train(this.text || this.innerText);
+        render(this.text || this.innerText);
     } catch(err) {
         displayError(err.message);
     }
@@ -88,8 +88,8 @@ $("#accordion #units a").click(function (event) {
 // Handle structure clicks
 $("#accordion #structures a").click(function (event) {
     try {
-        zerg.construct(this.text);
-        render(this.text);
+        zerg.construct(this.text || this.innerText);
+        render(this.text || this.innerText);
     } catch(err) {
         displayError(err.message);
     }
@@ -100,8 +100,8 @@ $("#accordion #structures a").click(function (event) {
 // Handle upgrade clicks
 $("#accordion #upgrades a").click(function (event) {
     try {
-        zerg.upgrade(this.text);
-        render(this.text);
+        zerg.upgrade(this.text || this.innerText);
+        render(this.text || this.innerText);
     } catch(err) {
         displayError(err.message);
     }
