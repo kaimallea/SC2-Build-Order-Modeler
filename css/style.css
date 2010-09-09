@@ -137,6 +137,15 @@ body {
     margin-left: 5px;
 }
 
+#protoss-time {
+    display: inline-block;
+    background: transparent url("../img/resources/icon-buildtime-protoss.gif") no-repeat;
+    background-position: bottom left;
+    text-indent: 20px;
+    margin-left: 5px;    
+}
+
+
 #terran-supply {
     display: inline-block;
     background: transparent url("../img/resources/icon-supply-terran.gif") no-repeat;
@@ -160,6 +169,14 @@ body {
     margin-left: 5px;
 }
 
+#terran-time {
+    display: inline-block;
+    background: transparent url("../img/resources/icon-buildtime-terran.gif") no-repeat;
+    background-position: bottom left;
+    text-indent: 20px;
+    margin-left: 5px;    
+}
+
 #zerg-supply {
     display: inline-block;
     background: transparent url("../img/resources/icon-supply-zerg.gif") no-repeat;
@@ -181,6 +198,14 @@ body {
     background-position: bottom left;
     text-indent: 20px;
     margin-left: 5px;
+}
+
+#zerg-time {
+    display: inline-block;
+    background: transparent url("../img/resources/icon-buildtime-zerg.gif") no-repeat;
+    background-position: bottom left;
+    text-indent: 20px;
+    margin-left: 5px;    
 }
 
 #accordion {
@@ -212,6 +237,7 @@ body {
     position: absolute;
     top: 42px;
     left: 5px;
+    z-index: 2;
 }
 
 .error {

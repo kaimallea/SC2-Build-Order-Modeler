@@ -2,27 +2,27 @@
 <div id="units">
     <table style="text-align: center;">
         <tr>
-            <td><a href="#" class="unit-thumb"><span class="probe"></span>Probe</a></td>
-            <td><a href="#" class="unit-thumb"><span class="zealot"></span>Zealot</a></td>
-            <td><a href="#" class="unit-thumb"><span class="stalker"></span>Stalker</a></td>
-            <td><a href="#" class="unit-thumb"><span class="sentry"></span>Sentry</a></td>
-        </tr>
-        <tr>
-            <td><a href="#" class="unit-thumb"><span class="observer"></span>Observer</a></td>
-            <td><a href="#" class="unit-thumb"><span class="immortal"></span>Immortal</a></td>
-            <td><a href="#" class="unit-thumb"><span class="warp-prism"></span>Warp Prism</a></td>
+            <td><a href="#" class="unit-thumb"><span class="archon"></span>Archon</a></td>
+            <td><a href="#" class="unit-thumb"><span class="carrier"></span>Carrier</a></td>
             <td><a href="#" class="unit-thumb"><span class="colossus"></span>Colossus</a></td>
-        </tr>
-        <tr>
-            <td><a href="#" class="unit-thumb"><span class="phoenix"></span>Phoenix</a></td>
-            <td><a href="#" class="unit-thumb"><span class="void-ray"></span>Void Ray</a></td>
-            <td><a href="#" class="unit-thumb"><span class="high-templar"></span>High Templar</a></td>
             <td><a href="#" class="unit-thumb"><span class="dark-templar"></span>Dark Templar</a></td>
         </tr>
         <tr>
-            <td><a href="#" class="unit-thumb"><span class="archon"></span>Archon</a></td>
-            <td><a href="#" class="unit-thumb"><span class="carrier"></span>Carrier</a></td>
+            <td><a href="#" class="unit-thumb"><span class="high-templar"></span>High Templar</a></td>
+            <td><a href="#" class="unit-thumb"><span class="immortal"></span>Immortal</a></td>
             <td><a href="#" class="unit-thumb"><span class="mothership"></span>Mothership</a></td>
+            <td><a href="#" class="unit-thumb"><span class="observer"></span>Observer</a></td>         
+        </tr>
+        <tr>
+            <td><a href="#" class="unit-thumb"><span class="phoenix"></span>Phoenix</a></td>
+            <td><a href="#" class="unit-thumb"><span class="probe"></span>Probe</a></td>
+            <td><a href="#" class="unit-thumb"><span class="sentry"></span>Sentry</a></td>
+            <td><a href="#" class="unit-thumb"><span class="stalker"></span>Stalker</a></td>         
+        </tr>
+        <tr>
+            <td><a href="#" class="unit-thumb"><span class="void-ray"></span>Void Ray</a></td>
+            <td><a href="#" class="unit-thumb"><span class="warp-prism"></span>Warp Prism</a></td>
+            <td><a href="#" class="unit-thumb"><span class="zealot"></span>Zealot</a></td>           
         </tr>
     </table>
 </div>
@@ -30,26 +30,26 @@
 <div id="structures">
     <table style="text-align: center;">
         <tr>
-            <td><a href="#" class="struct-thumb"><span class="pylon"></span>Pylon</a></td>
-            <td><a href="#" class="struct-thumb"><span class="gateway"></span>Gateway</a></td>
+            <td><a href="#" class="struct-thumb"><span class="assimilator"></span>Assimilator</a></td>
             <td><a href="#" class="struct-thumb"><span class="cybernetics-core"></span>Cybernetics Core</a></td>
-            <td><a href="#" class="struct-thumb"><span class="forge"></span>Forge</a></td>
+            <td><a href="#" class="struct-thumb"><span class="dark-shrine"></span>Dark Shrine</a></td>
+            <td><a href="#" class="struct-thumb"><span class="fleet-beacon"></span>Fleet Beacon</a></td>
         </tr>
         <tr>
-            <td><a href="#" class="struct-thumb"><span class="assimilator"></span>Assimilator</a></td>
-            <td><a href="#" class="struct-thumb"><span class="fleet-beacon"></span>Fleet Beacon</a></td>
+            <td><a href="#" class="struct-thumb"><span class="forge"></span>Forge</a></td>            
+            <td><a href="#" class="struct-thumb"><span class="gateway"></span>Gateway</a></td>
+            <td><a href="#" class="struct-thumb"><span class="nexus"></span>Nexus</a></td>
+            <td><a href="#" class="struct-thumb"><span class="photon-cannon"></span>Photon Cannon</a></td>                                    
+        </tr>
+        <tr>
+            <td><a href="#" class="struct-thumb"><span class="pylon"></span>Pylon</a></td>
             <td><a href="#" class="struct-thumb"><span class="robotics-facility"></span>Robotics Facility</a></td>
             <td><a href="#" class="struct-thumb"><span class="robotics-bay"></span>Robotics Bay</a></td>
-        </tr>
-        <tr>
-            <td><a href="#" class="struct-thumb"><span class="nexus"></span>Nexus</a></td>
-            <td><a href="#" class="struct-thumb"><span class="photon-cannon"></span>Photon Cannon</a></td>
             <td><a href="#" class="struct-thumb"><span class="templar-archives"></span>Templar Archives</a></td>
-            <td><a href="#" class="struct-thumb"><span class="stargate"></span>Stargate</a></td>
         </tr>
-        <tr>
-            <td><a href="#" class="struct-thumb"><span class="twilight-council"></span>Twilight Council</a></td>            
-            <td><a href="#" class="struct-thumb"><span class="dark-shrine"></span>Dark Shrine</a></td>
+        <tr> 
+            <td><a href="#" class="struct-thumb"><span class="twilight-council"></span>Twilight Council</a></td>
+            <td><a href="#" class="struct-thumb"><span class="stargate"></span>Stargate</a></td>
         </tr>
     </table>
 </div>
@@ -57,7 +57,6 @@
 <div id="upgrades">
 </div>
 <script>
-// TODO: Replace upgrade generation with static HTML
 if (!protoss) {
     var protoss = new Protoss();
 }
@@ -74,39 +73,17 @@ for (var i in protoss.upgrades) {
 }
 e.innerHTML += "</ul>";
 
-// Handle unit clicks
-$("#accordion #units a").click(function (event) {
+// Handle clicks on all Protoss game objects
+$("#units a, #structures a, #upgrades a").click(function (event) {
+    var o = this.text || this.innerText;
     try {
-        protoss.train(this.text || this.innerText);
-        render(this.text || this.innerText);
-    } catch(err) {
-        displayError(err.message);
+        protoss.build(o);
+        render(o);
     }
-
-    event.preventDefault();
-});
-
-// Handle structure clicks
-$("#accordion #structures a").click(function (event) {
-    try {
-        protoss.construct(this.text || this.innerText);
-        render(this.text || this.innerText);
-    } catch(err) {
-        displayError(err.message);
+    catch (e) {
+        displayError(e.message);
     }
-
-    event.preventDefault();
-});
-
-// Handle upgrade clicks
-$("#accordion #upgrades a").click(function (event) {
-    try {
-        protoss.upgrade(this.text || this.innerText);
-        render(this.text || this.innerText);
-    } catch(err) {
-        displayError(err.message);
-    }
-
+    
     event.preventDefault();
 });
 </script>

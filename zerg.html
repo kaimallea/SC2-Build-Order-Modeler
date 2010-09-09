@@ -2,26 +2,26 @@
 <div id="units">
     <table style="text-align: center;">
         <tr>
+            <td><a href="#" class="unit-thumb"><span class="baneling"></span>Baneling</a></td>
+            <td><a href="#" class="unit-thumb"><span class="brood-lord"></span>Brood Lord</a></td>
+            <td><a href="#" class="unit-thumb"><span class="corruptor"></span>Corruptor</a></td>
             <td><a href="#" class="unit-thumb"><span class="drone"></span>Drone</a></td>
-            <td><a href="#" class="unit-thumb"><span class="overlord"></span>Overlord</a></td>
-            <td><a href="#" class="unit-thumb"><span class="zergling"></span>Zergling</a></td>
-            <td><a href="#" class="unit-thumb"><span class="queen"></span>Queen</a></td>
         </tr>
         <tr>
             <td><a href="#" class="unit-thumb"><span class="hydralisk"></span>Hydralisk</a></td>
-            <td><a href="#" class="unit-thumb"><span class="baneling"></span>Baneling</a></td>
-            <td><a href="#" class="unit-thumb"><span class="overseer"></span>Overseer</a></td>
-            <td><a href="#" class="unit-thumb"><span class="roach"></span>Roach</a></td>
-        </tr>
-        <tr>
             <td><a href="#" class="unit-thumb"><span class="infestor"></span>Infestor</a></td>
             <td><a href="#" class="unit-thumb"><span class="mutalisk"></span>Mutalisk</a></td>
-            <td><a href="#" class="unit-thumb"><span class="corruptor"></span>Corruptor</a></td>
             <td><a href="#" class="unit-thumb"><span class="nydus-worm"></span>Nydus Worm</a></td>
         </tr>
         <tr>
+            <td><a href="#" class="unit-thumb"><span class="overlord"></span>Overlord</a></td>
+            <td><a href="#" class="unit-thumb"><span class="overseer"></span>Overseer</a></td>
+            <td><a href="#" class="unit-thumb"><span class="queen"></span>Queen</a></td>
+            <td><a href="#" class="unit-thumb"><span class="roach"></span>Roach</a></td>
+        </tr>
+        <tr>
             <td><a href="#" class="unit-thumb"><span class="ultralisk"></span>Ultralisk</a></td>
-            <td><a href="#" class="unit-thumb"><span class="brood-lord"></span>Brood Lord</a></td>
+            <td><a href="#" class="unit-thumb"><span class="zergling"></span>Zergling</a></td>
         </tr>
     </table>
 </div>
@@ -29,26 +29,26 @@
 <div id="structures">
     <table style="text-align: center;">
         <tr>
-            <td><a href="#" class="struct-thumb"><span class="spawning-pool"></span>Spawning Pool</a></td>
+            <td><a href="#" class="struct-thumb"><span class="baneling-nest"></span>Baneling Nest</a></td>
+            <td><a href="#" class="struct-thumb"><span class="creep-tumor"></span>Creep Tumor</a></td>
+            <td><a href="#" class="struct-thumb"><span class="evolution-chamber"></span>Evolution Chamber</a></td>
             <td><a href="#" class="struct-thumb"><span class="extractor"></span>Extractor</a></td>
-            <td><a href="#" class="struct-thumb"><span class="roach-warren"></span>Roach Warren</a></td>
-            <td><a href="#" class="struct-thumb"><span class="hydralisk-den"></span>Hydralisk Den</a></td>
         </tr>
         <tr>
-            <td><a href="#" class="struct-thumb"><span class="evolution-chamber"></span>Evolution Chamber</a></td>
+            <td><a href="#" class="struct-thumb"><span class="spawning-pool"></span>Spawning Pool</a></td>
+            <td><a href="#" class="struct-thumb"><span class="hydralisk-den"></span>Hydralisk Den</a></td>
             <td><a href="#" class="struct-thumb"><span class="hatchery"></span>Hatchery</a></td>
-            <td><a href="#" class="struct-thumb"><span class="baneling-nest"></span>Baneling Nest</a></td>
+            <td><a href="#" class="struct-thumb"><span class="infestation-pit"></span>Infestation Pit</a></td>
+        </tr>
+        <tr>
+            <td><a href="#" class="struct-thumb"><span class="nydus-network"></span>Nydus Network</a></td>
+            <td><a href="#" class="struct-thumb"><span class="roach-warren"></span>Roach Warren</a></td>
+            <td><a href="#" class="struct-thumb"><span class="spine-crawler"></span>Spine Crawler</a></td>
             <td><a href="#" class="struct-thumb"><span class="spire"></span>Spire</a></td>
         </tr>
         <tr>
-            <td><a href="#" class="struct-thumb"><span class="creep-tumor"></span>Creep Tumor</a></td>
-            <td><a href="#" class="struct-thumb"><span class="ultralisk-cavern"></span>Ultralisk Cavern</a></td>
-            <td><a href="#" class="struct-thumb"><span class="spine-crawler"></span>Spine Crawler</a></td>
             <td><a href="#" class="struct-thumb"><span class="spore-crawler"></span>Spore Crawler</a></td>
-        </tr>
-        <tr>
-            <td><a href="#" class="struct-thumb"><span class="infestation-pit"></span>Infestation Pit</a></td>
-            <td><a href="#" class="struct-thumb"><span class="nydus-network"></span>Nydus Network</a></td>
+            <td><a href="#" class="struct-thumb"><span class="ultralisk-cavern"></span>Ultralisk Cavern</a></td>
         </tr>
     </table>
 </div>
@@ -68,39 +68,17 @@ for (var i in zerg.upgrades) {
 }
 e.innerHTML += "</ul>";
 
-// Handle unit clicks
-$("#accordion #units a").click(function (event) {
+// Handle clicks on all Zerg game objects
+$("#units a, #structures a, #upgrades a").click(function (event) {
+    var o = this.text || this.innerText;
     try {
-        zerg.train(this.text || this.innerText);
-        render(this.text || this.innerText);
-    } catch(err) {
-        displayError(err.message);
+        zerg.build(o);
+        render(o);
     }
-
-    event.preventDefault();
-});
-
-// Handle structure clicks
-$("#accordion #structures a").click(function (event) {
-    try {
-        zerg.construct(this.text || this.innerText);
-        render(this.text || this.innerText);
-    } catch(err) {
-        displayError(err.message);
+    catch (e) {
+        displayError(e.message);
     }
-
-    event.preventDefault();
-});
-
-// Handle upgrade clicks
-$("#accordion #upgrades a").click(function (event) {
-    try {
-        zerg.upgrade(this.text || this.innerText);
-        render(this.text || this.innerText);
-    } catch(err) {
-        displayError(err.message);
-    }
-
+    
     event.preventDefault();
 });
 </script>
